@@ -47,17 +47,9 @@
 <h2>Incoming Webhooks</h2>
 <p>These urls should be added to netlify /settings/deploys "Deploy notifications" section as Outgoing Webhooks</p>
 {# {%if env == 'production'%} #}
-<h3>Live</h3>
 <ul>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/live-deploy-status-started</li>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/live-deploy-status-succeeded</li>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/live-deploy-status-failed</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/deploy-status-started</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/deploy-status-succeeded</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/deploy-status-failed</li>
 </ul>
 {# {% endif %} #}
-
-<h3>Preview</h3>
-<ul>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/preview-deploy-status-started</li>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/preview-deploy-status-succeeded</li>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/preview-deploy-status-failed</li>
-</ul>

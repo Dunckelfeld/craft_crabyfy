@@ -157,14 +157,14 @@ class DeployController extends Controller
           Craft::debug($postContent, 'cra-by-fy');
           if($content->branch == "master") {
             $result = 'live';
-          } else if($content->branch == "stage"){ 
+          } else if($content->branch == "stage"){
             $result = 'preview';
           }
         }
         return $result;
     }
 
-    private function setStatus($status,$deployType) {
+    private function setStatus($status, $deployType) {
       $deployStatus = new DeployStatus();
       $deployStatus->status = $status;
       $deployStatus->deployType = $deployType;
