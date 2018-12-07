@@ -20,30 +20,30 @@
   // DEPLOYMENT TRIGGERS
   // *************************
   // // deploy buttons that call the url with alert or without alert by ajax and prevent being routed
-  // var ajaxButtons = document.querySelectorAll("#crabify-deploy-live, #crabify-deploy-preview");
-  // for(var i = 0; i<ajaxButtons.length; i++) {
-  //   ajaxButtons[i].onclick = function(e) {
-  //     e.preventDefault();
-  //     confirm("trigger " + e.target.href);
-  //     callAjaxUrl(e.target.href, ajaxButtons[i]);
-  //     return false;
-  //   };
-  // }
+  var ajaxButtons = document.querySelectorAll("#crabify-deploy-live, #crabify-deploy-preview");
+  for(var i = 0; i<ajaxButtons.length; i++) {
+    ajaxButtons[i].onclick = function(e) {
+      e.preventDefault();
+      confirm("trigger " + e.target.href);
+      callAjaxUrl(e.target.href, ajaxButtons[i]);
+      return false;
+    };
+  }
 
-  // // function that makes ajax calls to netlify deploy triggers
-  // function callAjaxUrl(url, button) {
-  //   var xmlHttp = new XMLHttpRequest();
-  //   xmlHttp.onreadystatechange = function() {
-  //     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-  //       console.log('ajax Call succeeded');
-  //     } else {
-  //       console.log('ajax Call failed');
-  //       // addClass(button, 'ajax-error');
-  //     }
-  //   }
-  //   xmlHttp.open("GET", url, true); // true for asynchronous
-  //   xmlHttp.send(null);
-  // }
+  // function that makes ajax calls to netlify deploy triggers
+  function callAjaxUrl(url, button) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        console.log('ajax Call succeeded');
+      } else {
+        console.log('ajax Call failed');
+        // addClass(button, 'ajax-error');
+      }
+    }
+    xmlHttp.open("GET", url, true); // true for asynchronous
+    xmlHttp.send(null);
+  }
 
 
   // *************************
