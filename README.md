@@ -32,8 +32,8 @@ goto /admin/settings/plugins/cra-by-fy and set up urls and hooks for communicati
 
 ## Using CraByFy
 
-Find a control panel page with buttons to deploy to preview and live netlify /admin/actions/cra-by-fy/deploy
-Find a button on entry page to go to netlify preview
+* Find a control panel page with buttons to deploy to preview and live netlify /admin/actions/cra-by-fy/deploy
+* Find a button on entry page to go to netlify preview
 
 ## CraByFy Roadmap
 
