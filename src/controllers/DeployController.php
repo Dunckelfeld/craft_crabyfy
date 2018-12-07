@@ -157,7 +157,7 @@ class DeployController extends Controller
           Craft::debug($postContent, 'cra-by-fy');
           if($content->branch == "master") {
             $result = 'live';
-          } else if($content->branch == "stage"){
+          } else if($content->branch == "stage"){ 
             $result = 'preview';
           }
         }
