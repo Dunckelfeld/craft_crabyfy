@@ -40,6 +40,8 @@ use craft\helpers\UrlHelper;
  */
 class DeployController extends Controller
 {
+    public $enableCsrfValidation = false;
+    
     // Protected Properties
     // =========================================================================
 

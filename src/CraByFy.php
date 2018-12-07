@@ -130,7 +130,7 @@ class CraByFy extends Plugin
                 $event->rules['cpActionTrigger8'] = 'cra-by-fy/deploy/live-deploy-status';
             }
         );
-
+        
         Event::on(
             Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,
