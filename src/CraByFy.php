@@ -176,6 +176,10 @@ class CraByFy extends Plugin
             return $this->deployButtonAssets();
         });
 
+        Craft::$app->getView()->hook('cp.entries.edit.details', function(array &$context) {
+            return $this->previewButton();
+        });
+
 /**
  * Logging in Craft involves using one of the following methods:
  *
@@ -227,6 +231,24 @@ class CraByFy extends Plugin
     {
         return Craft::$app->view->renderTemplate(
             'cra-by-fy/deployButtonAssets'
+        );
+    }
+
+    /**
+     * Returns the rendered sidebar HTML, which will be inserted into the content
+     * block on the sidebar page.
+     *
+     * @return string The rendered sidebar HTML
+     */
+    protected function previewButton(): string
+    {
+
+        $settings = CraByFy::$plugin->getSettings();
+        $variables = [
+          'previewLink' => $settings['netlifyPreviewUrl'],
+        ];
+        return Craft::$app->view->renderTemplate(
+            'cra-by-fy/previewButton', $variables
         );
     }
 

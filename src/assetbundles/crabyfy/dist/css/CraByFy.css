@@ -77,3 +77,7 @@
  .btn.live-status-started:before {
    background: orange;
  }
+
+ #details #crabify-deploy-preview {
+   margin: 24px;
+ }
