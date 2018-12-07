@@ -122,9 +122,9 @@
       if (!button.classList.contains('failed')) {
         button.classList.add('failed');
         // alert('Live Deployment did not pass :(');
-        setTimeout(function() {
-          button.classList.remove('failed');
-        }, 10000);
+        // setTimeout(function() {
+        //   button.classList.remove('failed');
+        // }, 10000);
       }
     } else {
       button.classList.remove('succeeded');
@@ -134,9 +134,9 @@
       if (!button.classList.contains('error')) {
         button.classList.add('error');
         // alert('Live Deployment could not be liveTriggered :(');
-        setTimeout(function() {
-          button.classList.remove('error');
-        }, 10000);
+        // setTimeout(function() {
+        //   button.classList.remove('error');
+        // }, 10000);
       }
     }
   }

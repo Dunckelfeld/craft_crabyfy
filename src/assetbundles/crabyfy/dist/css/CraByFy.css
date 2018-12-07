@@ -28,42 +28,57 @@
    transition: background 2000ms ease-out;
  }
 
- #nav-live-deploy a.started {
+ #nav-preview-url a {
+   position: relative;
+ }
+
+ #nav-preview-url a:after,
+ #nav-live-deploy a:after {
+   content: ' ';
+   display: block;
+   width: 10px;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   right: 0;
+ }
+
+ #nav-live-deploy a.started:after {
    background: orange;
    transition: background 500ms ease-out;
  }
 
- #nav-live-deploy a.succeeded {
+ #nav-live-deploy a.succeeded:after {
    background: green;
    transition: background 500ms ease-out;
  }
 
- #nav-live-deploy a.error {
+ #nav-live-deploy a.error:after {
    background: red;
    transition: background 500ms ease-out;
  }
 
- #nav-live-deploy a.failed {
+ #nav-live-deploy a.failed:after {
    background: red;
    transition: background 500ms ease-out;
  }
 
- #nav-preview-url a.started {
+ #nav-preview-url a.started:after {
    background: orange;
    transition: background 500ms ease-out;
  }
 
- #nav-preview-url a.succeeded {
+ #nav-preview-url a.succeeded:after {
    background: green;
    transition: background 500ms ease-out;
  }
 
- #nav-preview-url a.error {
+ #nav-preview-url a.error:after {
    background: red;
    transition: background 500ms ease-out;
  }
 
- #nav-preview-url a.failed {
+ #nav-preview-url a.failed:after {
    background: red;
    transition: background 500ms ease-out;
  }
