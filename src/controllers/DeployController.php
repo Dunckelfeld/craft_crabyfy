@@ -203,6 +203,8 @@ class DeployController extends Controller
     }
 
     private function getStatus($deployType) {
+
+      try {
         $deployStatus = new DeployStatus();
         $deployStatus = DeployStatus::find()
           ->where(['deployType' => $deployType])
@@ -210,7 +212,16 @@ class DeployController extends Controller
           ->limit(1)
           ->all();
 
-        return $deployStatus[0]->status;
+        if(is_array($deployStatus) && isset($deployStatus[0])) {
+          $status = $deployStatus[0]->status;
+        } else {
+          $status = '';
+        }
+      } catch (Exception $e){
+        $status = '';
+      }
+
+      return $status;
     }
 
 }
