@@ -121,16 +121,13 @@ class CraByFy extends Plugin
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['cpActionTrigger0'] = 'cra-by-fy/deploy';
                 $event->rules['cpActionTrigger1'] = 'cra-by-fy/deploy/deploy-live';
-                $event->rules['cpActionTrigger2'] = 'cra-by-fy/deploy/live-deploy-status-failed';
-                $event->rules['cpActionTrigger3'] = 'cra-by-fy/deploy/live-deploy-status-succeeded';
-                $event->rules['cpActionTrigger4'] = 'cra-by-fy/deploy/live-deploy-status-started';
-                $event->rules['cpActionTrigger5'] = 'cra-by-fy/deploy/preview-deploy-status-failed';
-                $event->rules['cpActionTrigger6'] = 'cra-by-fy/deploy/preview-deploy-status-succeeded';
-                $event->rules['cpActionTrigger7'] = 'cra-by-fy/deploy/preview-deploy-status-started';
+                $event->rules['cpActionTrigger2'] = 'cra-by-fy/deploy/deploy-status-failed';
+                $event->rules['cpActionTrigger3'] = 'cra-by-fy/deploy/deploy-status-succeeded';
+                $event->rules['cpActionTrigger4'] = 'cra-by-fy/deploy/deploy-status-started';
                 $event->rules['cpActionTrigger8'] = 'cra-by-fy/deploy/live-deploy-status';
             }
         );
-        
+
         Event::on(
             Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,

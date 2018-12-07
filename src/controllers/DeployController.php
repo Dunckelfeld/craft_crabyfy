@@ -115,13 +115,10 @@ class DeployController extends Controller
      *
      * @return mixed
      */
-    public function actionLiveDeployStatusFailed()
+    public function actionDeployStatusFailed()
     {
-        Craft::debug('debugging post content', 'cra-by-fy');
-        $postContent = file_get_contents('php://input');
-        Craft::debug($postContent, 'cra-by-fy');
-        $result = 'actionLiveDeployStatusFailed';
-        $this->setStatus('failed','live');
+        $result = 'actionDeployStatusFailed';
+        $this->setStatus('failed', $this->getType());
         return $result;
     }
 
@@ -131,13 +128,10 @@ class DeployController extends Controller
      *
      * @return mixed
      */
-    public function actionLiveDeployStatusSucceeded()
+    public function actionDeployStatusSucceeded()
     {
-        Craft::debug('debugging post content', 'cra-by-fy');
-        $postContent = file_get_contents('php://input');
-        Craft::debug($postContent, 'cra-by-fy');
-        $result = 'actionLiveDeployStatusSucceeded';
-        $this->setStatus('succeeded','live');
+        $result = 'actionDeployStatusSucceeded';
+        $this->setStatus('succeeded', $this->getType());
         return $result;
     }
 
@@ -147,61 +141,26 @@ class DeployController extends Controller
      *
      * @return mixed
      */
-    public function actionLiveDeployStatusStarted()
+    public function actionDeployStatusStarted()
     {
-        Craft::debug('debugging post content', 'cra-by-fy');
-        $postContent = file_get_contents('php://input');
-        Craft::debug($postContent, 'cra-by-fy');
-        $result = 'actionLiveDeployStatusStarted';
-        $this->setStatus('started','live');
+        $result = 'actionDeployStatusStarted';
+        $this->setStatus('started',$this->getType());
         return $result;
     }
 
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/cra-by-fy/deploy/do-something
-     *
-     * @return mixed
-     */
-    public function actionPreviewDeployStatusFailed()
-    {
-        Craft::debug('debugging post content', 'cra-by-fy');
+    private function getType() {
+        $result = '';
         $postContent = file_get_contents('php://input');
-        Craft::debug($postContent, 'cra-by-fy');
-        $result = 'actionPreviewDeployStatusFailed';
-        $this->setStatus('failed','preview');
-        return $result;
-    }
-
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/cra-by-fy/deploy/do-something
-     *
-     * @return mixed
-     */
-    public function actionPreviewDeployStatusSucceeded()
-    {
-        Craft::debug('debugging post content', 'cra-by-fy');
-        $postContent = file_get_contents('php://input');
-        Craft::debug($postContent, 'cra-by-fy');
-        $result = 'actionPreviewDeployStatusSucceeded';
-        $this->setStatus('succeeded','preview');
-        return $result;
-    }
-
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/cra-by-fy/deploy/do-something
-     *
-     * @return mixed
-     */
-    public function actionPreviewDeployStatusStarted()
-    {
-        Craft::debug('debugging post content', 'cra-by-fy');
-        $postContent = file_get_contents('php://input');
-        Craft::debug($postContent, 'cra-by-fy');
-        $result = 'actionPreviewDeployStatusStarted';
-        $this->setStatus('started','preview');
+        if($postContent) {
+          $content = json_decode($postContent);
+          Craft::debug('debugging post content', 'cra-by-fy');
+          Craft::debug($postContent, 'cra-by-fy');
+          if($content->branch == "master") {
+            $result = 'live';
+          } else if($content->branch == "stage"){
+            $result = 'preview';
+          }
+        }
         return $result;
     }
 
