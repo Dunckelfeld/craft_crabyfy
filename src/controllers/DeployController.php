@@ -105,7 +105,7 @@ class DeployController extends Controller
     public function actionLiveDeployStatusFailed()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
-        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
+        Craft::debug($_REQUEST, 'cra-by-fy');
         $result = 'actionLiveDeployStatusFailed';
         $this->setStatus('failed','live');
         return $result;
@@ -120,7 +120,7 @@ class DeployController extends Controller
     public function actionLiveDeployStatusSucceeded()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
-        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
+        Craft::debug($_REQUEST, 'cra-by-fy');
         $result = 'actionLiveDeployStatusSucceeded';
         $this->setStatus('succeeded','live');
         return $result;
@@ -135,7 +135,7 @@ class DeployController extends Controller
     public function actionLiveDeployStatusStarted()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
-        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
+        Craft::debug($_REQUEST, 'cra-by-fy');
         $result = 'actionLiveDeployStatusStarted';
         $this->setStatus('started','live');
         return $result;
@@ -150,7 +150,7 @@ class DeployController extends Controller
     public function actionPreviewDeployStatusFailed()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
-        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
+        Craft::debug($_REQUEST, 'cra-by-fy');
         $result = 'actionPreviewDeployStatusFailed';
         $this->setStatus('failed','preview');
         return $result;
@@ -165,7 +165,7 @@ class DeployController extends Controller
     public function actionPreviewDeployStatusSucceeded()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
-        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
+        Craft::debug($_REQUEST, 'cra-by-fy');
         $result = 'actionPreviewDeployStatusSucceeded';
         $this->setStatus('succeeded','preview');
         return $result;
@@ -180,7 +180,7 @@ class DeployController extends Controller
     public function actionPreviewDeployStatusStarted()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
-        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
+        Craft::debug($_REQUEST, 'cra-by-fy');
         $result = 'actionPreviewDeployStatusStarted';
         $this->setStatus('started','preview');
         return $result;
