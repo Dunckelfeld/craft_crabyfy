@@ -2,7 +2,7 @@
 
 Deploys craft fed gatsby frontend to netlify
 
-![Screenshot](resources/img/plugin-logo.png)
+![Screenshot](resources/img/crabify.png)
 
 ## Requirements
 
