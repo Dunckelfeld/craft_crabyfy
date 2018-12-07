@@ -24,14 +24,16 @@ To install the plugin, follow these instructions.
 
 ## CraByFy Overview
 
--Insert text here-
+Use craft as a headless CMS with deployment (via gatsby) to Netlify
 
 ## Configuring CraByFy
 
-goto /admin/settings/plugins/cra-by-fy
+goto /admin/settings/plugins/cra-by-fy and set up urls and hooks for communication with netlify (triggers and status)
 
 ## Using CraByFy
 
+Find a control panel page with buttons to deploy to preview and live netlify /admin/actions/cra-by-fy/deploy
+Find a button on entry page to go to netlify preview
 
 ## CraByFy Roadmap
 
