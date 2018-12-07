@@ -102,6 +102,19 @@ class DeployController extends Controller
      *
      * @return mixed
      */
+    public function actionDeployPreview()
+    {
+        // $result = 'actionDeployLive';
+        $result = CraByFy::getInstance()->deploy->deployPreview();
+        return $result;
+    }
+
+    /**
+     * Handle a request going to our plugin's actionDoSomething URL,
+     * e.g.: actions/cra-by-fy/deploy/do-something
+     *
+     * @return mixed
+     */
     public function actionLiveDeployStatusFailed()
     {
         Craft::debug('debugging post content', 'cra-by-fy');
