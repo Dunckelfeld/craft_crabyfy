@@ -15,17 +15,25 @@
 
 {% extends "_layouts/cp" %}
 
-{% set title = "Netlify Deployment"|t %}
+{% set title = "CraByFy – Craft Gatsby Netlify Deployment"|t %}
 
 {# TODO: list of chronological status updates #}
 
 {% set content %}
   <section>
+    <a href="/admin/settings/plugins/cra-by-fy">Settings</a>
+  </section>
+  <hr/>
+  <section>
     <h1>Live</h1>
-    <h2>Deploy</h2>
-    <p>Wenn auf der Preview Seite alles passt, können die Änderungen hier live geschaltet werden</p>
-    <a href="{{deployLiveTriggerUrl}}" target="_blank" class="btn btnlivedeploy" id="crabify-deploy-live">Deploy Live</a>
-    <a href="{{liveUrl}}" target="_blank" >Zur Live Seite</a>
+    {% if deployLiveTriggerUrl|length %}
+      <h2>Deploy</h2>
+      <p>Wenn auf der Preview Seite alles passt, können die Änderungen hier live geschaltet werden</p>
+      <p><a href="{{deployLiveTriggerUrl}}" target="_blank" class="btn btnlivedeploy" id="crabify-deploy-live">Deploy Live</a></p>
+    {% endif %}
+    {% if liveUrl|length %}
+      <a href="{{liveUrl}}" target="_blank" >Zur Live Seite</a>
+    {% endif %}
     {# <h2>Status Updates</h2>
     <p>Die folgende liste bietet Informationen über die letzten Statusmeldungen der Deployments der Live Seite</p>
     <table>
@@ -47,10 +55,15 @@
   <hr/>
   <section>
     <h1>Preview</h1>
-    <h2>Deploy</h2>
-    <p>Beim Speichern wird die Preview Seite automatisch aufgebaut. Hier kann der Aufbau manuell angestoßen werden</p>
-    <a href="{{deployPreviewTriggerUrl}}" target="_blank" class="btn btnpreviewdeploy" id="crabify-deploy-preview">Deploy Preview</a>
-    <a href="{{previewUrl}}" target="_blank" >Zur Preview Seite</a>
+    {% if deployPreviewTriggerUrl|length %}
+      <h2>Deploy</h2>
+      <p>Beim Speichern wird die Preview Seite automatisch aufgebaut. Hier kann der Aufbau manuell angestoßen werden</p>
+      <p><a href="{{deployPreviewTriggerUrl}}" target="_blank" class="btn btnpreviewdeploy" id="crabify-deploy-preview">Deploy Preview</a></p>
+    {% endif %}
+    {% if previewUrl|length %}
+      <a href="{{previewUrl}}" target="_blank" >Zur Preview Seite</a>
+    {% endif %}
+
     {# <h2>Status Updates</h2>
     <p>Die folgende liste bietet Informationen über die letzten Statusmeldungen der Deployments der Preview Seite</p>
     <ul>

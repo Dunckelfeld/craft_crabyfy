@@ -37,10 +37,9 @@ goto /admin/settings/plugins/cra-by-fy
 
 Some things to do, and ideas for potential features:
 
-* Add a preview site link to entries with status led of preview build
+* conditional when settings are set: satus leds and index route buttons
 * subnav item with deploy live button
 * subnav item with preview site link
-* conditional when settings are set: satus leds and index route buttons
 * clean up (Service, Controller, Main Controller)
 
 Brought to you by [Dunckelfeld](dunckelfeld.de)
