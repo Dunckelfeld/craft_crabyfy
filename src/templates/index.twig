@@ -1,0 +1,60 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Craft Gatsby Netlify Deploy plugin for Craft CMS 3.x
+ *
+ * Craft Gatsby Netlify Deploy Settings.twig
+ *
+ * @author    Dunckelfeld
+ * @copyright Copyright (c) 2018 Dunckelfeld
+ * @link      dunckelfeld.de
+ * @package   CraftGatsbyNetlifyDeploy
+ * @since     1.0.0
+ */
+#}
+
+{% extends "_layouts/cp" %}
+
+{% set title = "Netlify Deployment"|t %}
+
+{# TODO: list of chronological status updates #}
+
+{% set content %}
+  <section>
+    <h1>Live</h1>
+    <h2>Deploy</h2>
+    <p>Wenn auf der Preview Seite alles passt, können die Änderungen hier live geschaltet werden</p>
+    <a href="{{deployLiveTriggerUrl}}" target="_blank" class="btn btnlivedeploy" id="crabify-deploy-live">Deploy Live</a>
+    <a href="{{liveUrl}}" target="_blank" >Zur Live Seite</a>
+    {# <h2>Status Updates</h2>
+    <p>Die folgende liste bietet Informationen über die letzten Statusmeldungen der Deployments der Live Seite</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table> #}
+
+  </section>
+  <hr/>
+  <section>
+    <h1>Preview</h1>
+    <h2>Deploy</h2>
+    <p>Beim Speichern wird die Preview Seite automatisch aufgebaut. Hier kann der Aufbau manuell angestoßen werden</p>
+    <a href="{{deployPreviewTriggerUrl}}" target="_blank" class="btn btnpreviewdeploy" id="crabify-deploy-preview">Deploy Preview</a>
+    <a href="{{previewUrl}}" target="_blank" >Zur Preview Seite</a>
+    {# <h2>Status Updates</h2>
+    <p>Die folgende liste bietet Informationen über die letzten Statusmeldungen der Deployments der Preview Seite</p>
+    <ul>
+
+    </ul> #}
+  </section>
+{% endset %}

@@ -8,138 +8,126 @@
  * @link      dunckelfeld.de
  * @package   CraByFy
  * @since     1.0.0
+ *
+ *
+ * TODO
+ * - visible notice on ajax error
  */
 
 (function() {
-  var previewButton = document.getElementById("nav-preview-url");
-  var previewButtonLink = document.querySelector("#nav-preview-url a");
 
-  var deployButton = document.getElementById("nav-live-deploy");
-  var deployButtonLink = document.querySelector("#nav-live-deploy a");
+  // *************************
+  // DEPLOYMENT TRIGGERS
+  // *************************
+  // // deploy buttons that call the url with alert or without alert by ajax and prevent being routed
+  // var ajaxButtons = document.querySelectorAll("#crabify-deploy-live, #crabify-deploy-preview");
+  // for(var i = 0; i<ajaxButtons.length; i++) {
+  //   ajaxButtons[i].onclick = function(e) {
+  //     e.preventDefault();
+  //     confirm("trigger " + e.target.href);
+  //     callAjaxUrl(e.target.href, ajaxButtons[i]);
+  //     return false;
+  //   };
+  // }
 
+  // // function that makes ajax calls to netlify deploy triggers
+  // function callAjaxUrl(url, button) {
+  //   var xmlHttp = new XMLHttpRequest();
+  //   xmlHttp.onreadystatechange = function() {
+  //     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+  //       console.log('ajax Call succeeded');
+  //     } else {
+  //       console.log('ajax Call failed');
+  //       // addClass(button, 'ajax-error');
+  //     }
+  //   }
+  //   xmlHttp.open("GET", url, true); // true for asynchronous
+  //   xmlHttp.send(null);
+  // }
+
+
+  // *************************
+  // STATUS
+  // *************************
+  // everything that needs classes (live-started, live-failed, live-succeeded) of status Updates
+  var liveStatusElements = document.querySelectorAll("#crabify-deploy-live, #nav-crabify");
+  var previewStatusElements = document.querySelectorAll("#crabify-deploy-preview, #nav-crabify");
+  // console.log(liveStatusElements, previewStatusElements);
+  var liveStati = [
+    'live-status-started',
+    'live-status-error',
+    'live-status-failed',
+    'live-status-succeeded',
+  ];
+  var previewStati = [
+    'preview-status-started',
+    'preview-status-error',
+    'preview-status-failed',
+    'preview-status-succeeded'
+  ];
+
+
+  // status variables
   var liveStatus = '';
   var previewStatus = '';
+  var oldLiveStatus = '';
+  var oldPreviewStatus = '';
 
-  var liveTriggered = false;
-  var prviewTriggered = false;
-
-  deployButton.onclick = function(e) {
-    e.preventDefault();
-    var url = deployButtonLink.href;
-    // confirm("really deploy?");
-    confirm("trigger " + url);
-    callDeployUrl(url);
-    liveTriggered = true;
-    return false;
-  };
-
-  function callDeployUrl(url) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            setLiveDeployButton(xmlHttp.responseText, deployButtonLink, 'live');
-    }
-    xmlHttp.open("GET", url, true); // true for asynchronous
-    xmlHttp.send(null);
+  // interval that checks statusses
+  function getStatus() {
+    getLiveDeployStatus();
+    getPreviewDeployStatus();
   }
 
+  getStatus(); // trigger directly
+  setInterval(function() {
+    getStatus();
+  }, 3000); // trigger every 3 seconds
+
+  // functions that retrieve the status
   function getLiveDeployStatus() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            setLiveDeployButton(xmlHttp.responseText, deployButtonLink, 'live');
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        liveStatus = xmlHttp.responseText;
+        setStatusClasses();
+      }
     }
     xmlHttp.open("GET", '/actions/cra-by-fy/deploy/live-deploy-status', true); // true for asynchronous
     xmlHttp.send(null);
   }
 
-  setInterval(function() {
-    getLiveDeployStatus();
-  }, 3000);
-
   function getPreviewDeployStatus() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            setPreviewDeployButton(xmlHttp.responseText, previewButtonLink, 'preview');
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        previewStatus = xmlHttp.responseText;
+        setStatusClasses();
+      }
     }
     xmlHttp.open("GET", '/actions/cra-by-fy/deploy/preview-deploy-status', true); // true for asynchronous
     xmlHttp.send(null);
   }
 
-  setInterval(function() {
-    getPreviewDeployStatus();
-  }, 3000);
-
-  function setLiveDeployButton(response, button, deployType) {
-    console.log(response, button, deployType);
-    if(liveStatus != response ) {
-      setButtonClass(response, button);
-      liveStatus = response;
+  // // function that adds and removes classes to all in querySelector
+  function setStatusClasses() {
+    if (oldLiveStatus !== liveStatus) {
+      setClasses(liveStatusElements, 'live-status-'+liveStatus, liveStati);
+      oldLiveStatus = liveStatus;
     }
-
-    if(response == 'error' || response == 'failed' || response == 'succeeded') {
-      liveTriggered = false;
+    if (oldPreviewStatus !== previewStatus) {
+      setClasses(previewStatusElements, 'preview-status-'+previewStatus, previewStati);
+      oldPreviewStatus= previewStatus;
     }
   }
 
-  function setPreviewDeployButton(response, button, deployType) {
-    console.log(response, button, deployType);
-    if(previewStatus != response ) {
-      setButtonClass(response, button);
-      previewStatus = response;
-    }
-
-    if(response == 'error' || response == 'failed' || response == 'succeeded') {
-      prviewTriggered = false;
+  function setClasses(elements, classes, removeClasses) {
+    console.log(elements, classes);
+    for(var i = 0; i<elements.length; i++) {
+      for (var j = 0; j < removeClasses.length; j++) {
+        elements[i].classList.remove(removeClasses[j]);
+      }
+      elements[i].classList.add(classes);
     }
   }
-
-  function setButtonClass(response,  button) {
-    if(response == 'started') {
-      if (!deployButtonLink.classList.contains('started')) {
-        button.classList.remove('error');
-        button.classList.remove('succeeded');
-        button.classList.remove('failed');
-
-        if (!button.classList.contains('started')) {
-          button.classList.add('started');
-        }
-      }
-    } else if(response == 'succeeded') {
-      button.classList.remove('error');
-      button.classList.remove('started');
-      button.classList.remove('failed');
-
-      if (!button.classList.contains('succeeded')) {
-        button.classList.add('succeeded');
-      }
-    } else if(response == 'failed'){
-      button.classList.remove('succeeded');
-      button.classList.remove('started');
-      button.classList.remove('error');
-
-      if (!button.classList.contains('failed')) {
-        button.classList.add('failed');
-        // alert('Live Deployment did not pass :(');
-        // setTimeout(function() {
-        //   button.classList.remove('failed');
-        // }, 10000);
-      }
-    } else {
-      button.classList.remove('succeeded');
-      button.classList.remove('started');
-      button.classList.remove('error');
-
-      if (!button.classList.contains('error')) {
-        button.classList.add('error');
-        // alert('Live Deployment could not be liveTriggered :(');
-        // setTimeout(function() {
-        //   button.classList.remove('error');
-        // }, 10000);
-      }
-    }
-  }
-
-
 })();

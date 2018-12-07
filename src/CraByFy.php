@@ -119,6 +119,7 @@ class CraByFy extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
+                $event->rules['cpActionTrigger0'] = 'cra-by-fy/deploy';
                 $event->rules['cpActionTrigger1'] = 'cra-by-fy/deploy/deploy-live';
                 $event->rules['cpActionTrigger2'] = 'cra-by-fy/deploy/live-deploy-status-failed';
                 $event->rules['cpActionTrigger3'] = 'cra-by-fy/deploy/live-deploy-status-succeeded';
@@ -147,22 +148,27 @@ class CraByFy extends Plugin
                 Craft::debug($event, 'cra-by-fy');
                 Craft::debug($event->navItems, 'cra-by-fy');
 
-                $event->navItems[] = [
-                    'url' => '/admin/actions/cra-by-fy/deploy/deploy-live',
-                    'id' => 'nav-live-deploy',
-                    'label' => 'Deploy Live',
-                ];
-
                 $settings = CraByFy::$plugin->getSettings();
                 $previewUrl = $settings['netlifyPreviewUrl'];
-                if(!empty($previewUrl)) {
-                  $event->navItems[] = [
-                    'url' => $previewUrl,
-                    'id' => 'nav-preview-url',
-                    'target' => '_blank',
-                    'label' => 'Preview',
-                  ];
-                }
+                $event->navItems[] = [
+                    'url' => '/admin/actions/cra-by-fy/deploy',
+                    'id' => 'nav-crabify',
+                    'label' => 'CraByFy',
+                    'icon' => '@dunckelfeld/crabyfy/icon.svg',
+                    'subnav' => [
+                      'deploy-live' => [
+                          'url' => '/admin/actions/cra-by-fy/deploy/deploy-live',
+                          'id' => 'nav-live-deploy',
+                          'label' => 'Deploy Live',
+                      ],
+                      'preview-url' => [
+                        'url' => $previewUrl,
+                        'id' => 'nav-preview-url',
+                        'target' => '_blank',
+                        'label' => 'Preview',
+                      ]
+                    ]
+                ];
             }
         );
 

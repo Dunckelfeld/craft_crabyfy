@@ -10,75 +10,70 @@
  * @since     1.0.0
  */
 
- #nav-live-deploy {
-   position: absolute;
-   bottom: 0;
-   margin: 0;
-   width: 100%;
-   left: 0;
+ .livepreviewbtn {
+   display: none; /* With gatsby deploy we currently have no live preview */
  }
 
- #nav-live-deploy a {
-   background: #1d262f;
-   padding-left: 18px;
-   padding-bottom: 20px;
-   padding-top: 20px;
-   width: 100%;
-   margin: 0;
-   transition: background 2000ms ease-out;
+  #nav-crabify,
+ .btn.btnpreviewdeploy,
+ .btn.btnlivedeploy {
+    padding-right: 30px;
+    position: relative;
+  }
+
+  #nav-crabify {
+     padding-right: 40px;
+  }
+
+  #nav-crabify:after,
+  #nav-crabify:before,
+ .btn.btnpreviewdeploy:before,
+ .btn.btnlivedeploy:before {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    content: ' ';
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 500ms ease-out;
+    background: #ecebeb;
+    border: 1px solid;
+    border-color: #b3b3b3;
+    border-radius: 50%;
  }
 
- #nav-preview-url a {
-   position: relative;
+ #nav-crabify:before,
+ #nav-crabify:after {
+   border-color: #2d2d2d;
+   background: #808080;
  }
 
- #nav-preview-url a:after,
- #nav-live-deploy a:after {
-   content: ' ';
-   display: block;
-   width: 10px;
-   height: 100%;
-   position: absolute;
-   top: 0;
-   right: 0;
+ #nav-crabify:after {
+   right: 30px;
  }
 
- #nav-live-deploy a.started:after {
-   background: orange;
-   transition: background 500ms ease-out;
- }
-
- #nav-live-deploy a.succeeded:after {
+  #nav-crabify.preview-status-succeeded:before,
+  #nav-crabify.live-status-succeeded:after,
+ .btn.preview-status-succeeded:before,
+ .btn.live-status-succeeded:before {
    background: green;
-   transition: background 500ms ease-out;
  }
 
- #nav-live-deploy a.error:after {
+ #nav-crabify.preview-status-error:before,
+ #nav-crabify.live-status-error:after,
+ #nav-crabify.preview-status-failed:before,
+ #nav-crabify.live-status-failed:after,
+ .btn.preview-status-error:before,
+ .btn.live-status-error:before,
+ .btn.preview-status-failed:before,
+ .btn.live-status-failed:before {
    background: red;
-   transition: background 500ms ease-out;
  }
 
- #nav-live-deploy a.failed:after {
-   background: red;
-   transition: background 500ms ease-out;
- }
-
- #nav-preview-url a.started:after {
+ #nav-crabify.preview-status-started:before,
+ #nav-crabify.live-status-started:after,
+ .btn.preview-status-started:before,
+ .btn.live-status-started:before {
    background: orange;
-   transition: background 500ms ease-out;
- }
-
- #nav-preview-url a.succeeded:after {
-   background: green;
-   transition: background 500ms ease-out;
- }
-
- #nav-preview-url a.error:after {
-   background: red;
-   transition: background 500ms ease-out;
- }
-
- #nav-preview-url a.failed:after {
-   background: red;
-   transition: background 500ms ease-out;
  }

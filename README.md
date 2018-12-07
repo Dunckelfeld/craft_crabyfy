@@ -28,16 +28,19 @@ To install the plugin, follow these instructions.
 
 ## Configuring CraByFy
 
--Insert text here-
+goto /admin/settings/plugins/cra-by-fy
 
 ## Using CraByFy
 
--Insert text here-
 
 ## CraByFy Roadmap
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* Add a preview site link to entries with status led of preview build
+* subnav item with deploy live button
+* subnav item with preview site link
+* conditional when settings are set: satus leds and index route buttons
+* clean up (Service, Controller, Main Controller)
 
 Brought to you by [Dunckelfeld](dunckelfeld.de)

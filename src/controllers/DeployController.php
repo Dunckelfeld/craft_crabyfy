@@ -16,6 +16,7 @@ use dunckelfeld\crabyfy\records\DeployStatus;
 use Craft;
 use craft\web\Controller;
 use craft\services\Sites;
+use craft\helpers\UrlHelper;
 
 /**
  * Deploy Controller
@@ -68,9 +69,16 @@ class DeployController extends Controller
      */
     public function actionIndex()
     {
-        $result = 'actionIndex';
 
-        return $result;
+        $settings = CraByFy::$plugin->getSettings();
+
+        $variables = [
+          'deployLiveTriggerUrl' => $settings['netlifyDeployLiveTriggerUrl'],
+          'deployPreviewTriggerUrl' => $settings['netlifyDeployPreviewTriggerUrl'],
+          'previewUrl' => $settings['netlifyPreviewUrl'],
+          'liveUrl' => UrlHelper::siteUrl(),
+        ];
+        return $this->renderTemplate('cra-by-fy', $variables);
     }
 
     /**
