@@ -1,0 +1,43 @@
+{
+    "name": "dunckelfeld/cra-by-fy",
+    "description": "Deploys craft fed gatsby frontend to netlify",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "crabyfy"
+    ],
+    "support": {
+        "docs": "https://github.com/Dunckelfeld/cra-by-fy/blob/master/README.md",
+        "issues": "https://github.com/Dunckelfeld/cra-by-fy/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dunckelfeld",
+            "homepage": "dunckelfeld.de"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "dunckelfeld\\crabyfy\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "CraByFy",
+        "handle": "cra-by-fy",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/Dunckelfeld/cra-by-fy/master/CHANGELOG.md",
+        "components": {
+            "deploy": "dunckelfeld\\crabyfy\\services\\Deploy"
+        },
+        "class": "dunckelfeld\\crabyfy\\CraByFy"
+    }
+}

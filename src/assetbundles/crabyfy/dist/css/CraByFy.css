@@ -1,0 +1,69 @@
+/**
+ * CraByFy plugin for Craft CMS
+ *
+ * CraByFy CSS
+ *
+ * @author    Dunckelfeld
+ * @copyright Copyright (c) 2018 Dunckelfeld
+ * @link      dunckelfeld.de
+ * @package   CraByFy
+ * @since     1.0.0
+ */
+
+ #nav-live-deploy {
+   position: absolute;
+   bottom: 0;
+   margin: 0;
+   width: 100%;
+   left: 0;
+ }
+
+ #nav-live-deploy a {
+   background: #1d262f;
+   padding-left: 18px;
+   padding-bottom: 20px;
+   padding-top: 20px;
+   width: 100%;
+   margin: 0;
+   transition: background 2000ms ease-out;
+ }
+
+ #nav-live-deploy a.started {
+   background: orange;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-live-deploy a.succeeded {
+   background: green;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-live-deploy a.error {
+   background: red;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-live-deploy a.failed {
+   background: red;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-preview-url a.started {
+   background: orange;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-preview-url a.succeeded {
+   background: green;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-preview-url a.error {
+   background: red;
+   transition: background 500ms ease-out;
+ }
+
+ #nav-preview-url a.failed {
+   background: red;
+   transition: background 500ms ease-out;
+ }

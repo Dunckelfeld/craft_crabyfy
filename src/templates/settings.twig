@@ -1,0 +1,63 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Craft Gatsby Netlify Deploy plugin for Craft CMS 3.x
+ *
+ * Craft Gatsby Netlify Deploy Settings.twig
+ *
+ * @author    Dunckelfeld
+ * @copyright Copyright (c) 2018 Dunckelfeld
+ * @link      dunckelfeld.de
+ * @package   CraftGatsbyNetlifyDeploy
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: 'Netlify Preview URL',
+    instructions: '(like https://xxxx.dunckelfeld.de)',
+    id: 'netlifyPreviewUrl',
+    name: 'netlifyPreviewUrl',
+    value: settings['netlifyPreviewUrl']})
+}}
+
+<h2>Outgoing Webhooks</h2>
+<p>These urls can be retrieved in netlify /settings/deploys "Build hooks" section</p>
+{{ forms.textField({
+    label: 'Netlify Deploy Preview Trigger URL',
+    instructions: '(like https://api.netlify.com/build_hooks/xxxxxxxxxxxxxxxxxxxx)',
+    id: 'netlifyDeployPreviewTriggerUrl',
+    name: 'netlifyDeployPreviewTriggerUrl',
+    value: settings['netlifyDeployPreviewTriggerUrl']})
+}}
+
+{# {% set env = getenv('ENVIRONMENT') %} #}
+{# {%if env == 'production'%} #}
+    {{ forms.textField({
+        label: 'Netlify Deploy Live Trigger URL',
+        instructions: '(like https://api.netlify.com/build_hooks/xxxxxxxxxxxxxxxxxxxx)',
+        id: 'netlifyDeployLiveTriggerUrl',
+        name: 'netlifyDeployLiveTriggerUrl',
+        value: settings['netlifyDeployLiveTriggerUrl']})
+    }}
+{# {% endif %} #}
+
+<h2>Incoming Webhooks</h2>
+<p>These urls should be added to netlify /settings/deploys "Deploy notifications" section as Outgoing Webhooks</p>
+{# {%if env == 'production'%} #}
+<h3>Live</h3>
+<ul>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}actions/cra-by-fy/deploy/live-deploy-status-started</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}actions/cra-by-fy/deploy/live-deploy-status-succeeded</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}actions/cra-by-fy/deploy/live-deploy-status-failed</li>
+</ul>
+{# {% endif %} #}
+
+<h3>Preview</h3>
+<ul>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}actions/cra-by-fy/deploy/preview-deploy-status-started</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}actions/cra-by-fy/deploy/preview-deploy-status-succeeded</li>
+  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}actions/cra-by-fy/deploy/preview-deploy-status-failed</li>
+</ul>
