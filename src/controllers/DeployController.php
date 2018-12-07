@@ -169,6 +169,7 @@ class DeployController extends Controller
      */
     public function actionPreviewDeployStatusStarted()
     {
+        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
         $result = 'actionPreviewDeployStatusStarted';
         $this->setStatus('started','preview');
         return $result;
