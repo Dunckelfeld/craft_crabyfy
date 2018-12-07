@@ -41,7 +41,7 @@ use craft\helpers\UrlHelper;
 class DeployController extends Controller
 {
     public $enableCsrfValidation = false;
-    
+
     // Protected Properties
     // =========================================================================
 
@@ -75,8 +75,8 @@ class DeployController extends Controller
         $settings = CraByFy::$plugin->getSettings();
 
         $variables = [
-          'deployLiveTriggerUrl' => $settings['netlifyDeployLiveTriggerUrl'],
-          'deployPreviewTriggerUrl' => $settings['netlifyDeployPreviewTriggerUrl'],
+          'deployLiveTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live',
+          'deployPreviewTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live',
           'previewUrl' => $settings['netlifyPreviewUrl'],
           'liveUrl' => UrlHelper::siteUrl(),
         ];
