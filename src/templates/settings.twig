@@ -48,8 +48,8 @@
 <p>These urls should be added to netlify /settings/deploys "Deploy notifications" section as Outgoing Webhooks</p>
 {# {%if env == 'production'%} #}
 <ul>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/deploy-status-started</li>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/deploy-status-succeeded</li>
-  <li> {{ alias(craft.app.sites.primarySite.baseUrl) }}/actions/cra-by-fy/deploy/deploy-status-failed</li>
+  <li> {{ craft.config.get('siteServerUrl') }}/actions/cra-by-fy/deploy/deploy-status-started</li>
+  <li> {{ craft.config.get('siteServerUrl') }}/actions/cra-by-fy/deploy/deploy-status-succeeded</li>
+  <li> {{ craft.config.get('siteServerUrl') }}/actions/cra-by-fy/deploy/deploy-status-failed</li>
 </ul>
 {# {% endif %} #}
