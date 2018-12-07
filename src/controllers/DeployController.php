@@ -76,7 +76,7 @@ class DeployController extends Controller
 
         $variables = [
           'deployLiveTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live',
-          'deployPreviewTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live', 
+          'deployPreviewTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-preview',
           'previewUrl' => $settings['netlifyPreviewUrl'],
           'liveUrl' => UrlHelper::siteUrl(),
         ];
@@ -169,6 +169,8 @@ class DeployController extends Controller
      */
     public function actionPreviewDeployStatusStarted()
     {
+        Craft::debug('debugging post content', 'cra-by-fy');
+        Craft::debug($_REQUEST['POST'], 'cra-by-fy');
         $result = 'actionPreviewDeployStatusStarted';
         $this->setStatus('started','preview');
         return $result;
