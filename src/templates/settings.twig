@@ -16,6 +16,14 @@
 {% import "_includes/forms" as forms %}
 
 {{ forms.textField({
+    label: 'Netlify Live URL',
+    instructions: '(like https://xxxx.domain.tld)',
+    id: 'netlifyLiveUrl',
+    name: 'netlifyLiveUrl',
+    value: settings['netlifyLiveUrl']})
+}}
+
+{{ forms.textField({
     label: 'Netlify Preview URL',
     instructions: '(like https://xxxx.dunckelfeld.de)',
     id: 'netlifyPreviewUrl',
@@ -48,8 +56,8 @@
 <p>These urls should be added to netlify /settings/deploys "Deploy notifications" section as Outgoing Webhooks</p>
 {# {%if env == 'production'%} #}
 <ul>
-  <li> {{ craft.config.get('siteServerUrl') }}/actions/cra-by-fy/deploy/deploy-status-started</li>
-  <li> {{ craft.config.get('siteServerUrl') }}/actions/cra-by-fy/deploy/deploy-status-succeeded</li>
-  <li> {{ craft.config.get('siteServerUrl') }}/actions/cra-by-fy/deploy/deploy-status-failed</li>
+  <li> {{ siteUrl }}actions/cra-by-fy/deploy/deploy-status-started</li>
+  <li> {{ siteUrl }}actions/cra-by-fy/deploy/deploy-status-succeeded</li>
+  <li> {{ siteUrl }}actions/cra-by-fy/deploy/deploy-status-failed</li>
 </ul>
 {# {% endif %} #}

@@ -78,7 +78,7 @@ class DeployController extends Controller
           'deployLiveTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live',
           'deployPreviewTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-preview',
           'previewUrl' => $settings['netlifyPreviewUrl'],
-          'liveUrl' => UrlHelper::siteUrl(),
+          'liveUrl' => $settings['netlifyLiveUrl'],
         ];
         return $this->renderTemplate('cra-by-fy', $variables);
     }

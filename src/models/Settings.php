@@ -55,6 +55,13 @@ class Settings extends Model
      */
     public $netlifyPreviewUrl = '';
 
+    /**
+     * Netlify Preview URL
+     *
+     * @var string
+     */
+    public $netlifyLiveUrl = '';
+
     // Public Methods
     // =========================================================================
 
@@ -74,6 +81,7 @@ class Settings extends Model
             ['netlifyDeployPreviewTriggerUrl', 'default', 'value' => ''],
             ['netlifyDeployLiveTriggerUrl', 'string'],
             ['netlifyDeployLiveTriggerUrl', 'default', 'value' => ''],
+            ['netlifyLiveUrl', 'default', 'value' => ''],
             ['netlifyPreviewUrl', 'default', 'value' => ''],
         ];
     }
