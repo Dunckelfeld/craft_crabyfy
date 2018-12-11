@@ -1,8 +1,3 @@
 {% if previewLink|length %}
-
-{{dump(previewLink)}}
-
-{# {{ "I like %this% and %that%."|replace({'%this%': foo, '%that%': "bar"}) }} #}
-
   <a href="{{previewLink}}/" target="_blank" class="btn btnpreviewdeploy" id="crabify-entry-preview">View Preview Site</a>
 {% endif %}
