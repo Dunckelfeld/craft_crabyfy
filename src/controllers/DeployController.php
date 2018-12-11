@@ -77,7 +77,7 @@ class DeployController extends Controller
         $variables = [
           'deployLiveTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live',
           'deployPreviewTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-preview',
-          'netlifyDeployPreviewTriggerUrl' => $settings['netlifyDeployLiveTriggerUrl'],
+          'netlifyDeployPreviewTriggerUrl' => $settings['netlifyDeployPreviewTriggerUrl'],
           'netlifyDeployLiveTriggerUrl' => $settings['netlifyDeployLiveTriggerUrl'],
           'previewUrl' => $settings['netlifyPreviewUrl'],
           'liveUrl' => $settings['netlifyLiveUrl'],
