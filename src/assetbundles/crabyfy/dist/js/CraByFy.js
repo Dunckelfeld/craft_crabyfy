@@ -48,7 +48,7 @@
   // *************************
   // everything that needs classes (live-started, live-failed, live-succeeded) of status Updates
   var liveStatusElements = document.querySelectorAll("#crabify-deploy-live, #nav-crabify");
-  var previewStatusElements = document.querySelectorAll("#crabify-deploy-preview, #nav-crabify");
+  var previewStatusElements = document.querySelectorAll("#crabify-deploy-preview, #nav-crabify, #crabify-entry-preview");
   // console.log(liveStatusElements, previewStatusElements);
   var liveStati = [
     'live-status-started',

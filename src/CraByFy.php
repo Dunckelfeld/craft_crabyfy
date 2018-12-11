@@ -174,7 +174,7 @@ class CraByFy extends Plugin
         });
 
         Craft::$app->getView()->hook('cp.entries.edit.details', function(array &$context) {
-            return $this->previewButton();
+            return $this->previewButton($context['entry']['uri']);
         });
 
 /**
@@ -237,12 +237,12 @@ class CraByFy extends Plugin
      *
      * @return string The rendered sidebar HTML
      */
-    protected function previewButton(): string
+    protected function previewButton($uri): string
     {
 
         $settings = CraByFy::$plugin->getSettings();
         $variables = [
-          'previewLink' => $settings['netlifyPreviewUrl'],
+          'previewLink' => $settings['netlifyPreviewUrl'].$uri,
         ];
         return Craft::$app->view->renderTemplate(
             'cra-by-fy/previewButton', $variables
