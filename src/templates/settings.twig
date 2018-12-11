@@ -16,19 +16,19 @@
 {% import "_includes/forms" as forms %}
 
 {{ forms.textField({
-    label: 'Netlify Live URL',
-    instructions: '(like https://xxxx.domain.tld)',
-    id: 'netlifyLiveUrl',
-    name: 'netlifyLiveUrl',
-    value: settings['netlifyLiveUrl']})
-}}
-
-{{ forms.textField({
     label: 'Netlify Preview URL',
     instructions: '(like https://xxxx.dunckelfeld.de)',
     id: 'netlifyPreviewUrl',
     name: 'netlifyPreviewUrl',
     value: settings['netlifyPreviewUrl']})
+}}
+
+{{ forms.textField({
+    label: 'Netlify Live URL',
+    instructions: '(like https://xxxx.domain.tld)',
+    id: 'netlifyLiveUrl',
+    name: 'netlifyLiveUrl',
+    value: settings['netlifyLiveUrl']})
 }}
 
 <h2>Outgoing Webhooks</h2>
