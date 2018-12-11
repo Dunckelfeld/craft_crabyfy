@@ -24,7 +24,7 @@
   for(var i = 0; i<ajaxButtons.length; i++) {
     ajaxButtons[i].onclick = function(e) {
       // e.preventDefault();
-      confirm("trigger " + e.target.href);
+      confirm("Soll das deployment auf netlify getriggert werden? (" + e.target.getAttribute('data-trigger-url')+")");
       callAjaxUrl(e.target.href, ajaxButtons[i]);
       return false;
     };
