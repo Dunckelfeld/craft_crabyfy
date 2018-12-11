@@ -155,13 +155,9 @@ class DeployController extends Controller
         $postContent = file_get_contents('php://input');
         if($postContent) {
           $content = json_decode($postContent);
-          Craft::debug('debugging post content', 'cra-by-fy');
+          Craft::debug('netlify post content', 'cra-by-fy');
           Craft::debug($postContent, 'cra-by-fy');
-          if($content->branch == "master") {
-            $result = 'live';
-          } else if($content->branch == "stage"){
-            $result = 'preview';
-          }
+          $result = $content->branch;
         }
         return $result;
     }
@@ -182,7 +178,8 @@ class DeployController extends Controller
      */
     public function actionLiveDeployStatus()
     {
-      return $this->getStatus('live');
+      $settings = CraByFy::$plugin->getSettings();
+      return $this->getStatus($settings['netlifyDeployLiveBranch']);
     }
 
     /**
@@ -193,7 +190,8 @@ class DeployController extends Controller
      */
     public function actionPreviewDeployStatus()
     {
-      return $this->getStatus('preview');
+      $settings = CraByFy::$plugin->getSettings();
+      return $this->getStatus($settings['netlifyDeployPreviewBranch']);
     }
 
     private function getStatus($deployType) {
@@ -209,10 +207,10 @@ class DeployController extends Controller
         if(is_array($deployStatus) && isset($deployStatus[0])) {
           $status = $deployStatus[0]->status;
         } else {
-          $status = '';
+          $status = '-';
         }
       } catch (Exception $e){
-        $status = '';
+        $status = '-';
       }
 
       return $status;

@@ -62,6 +62,20 @@ class Settings extends Model
      */
     public $netlifyLiveUrl = '';
 
+    /**
+     * Netlify Live Branch
+     *
+     * @var string
+     */
+    public $netlifyDeployLiveBranch = '';
+
+    /**
+     * Netlify Preview Branch
+     *
+     * @var string
+     */
+    public $netlifyDeployPreviewBranch = '';
+
     // Public Methods
     // =========================================================================
 
@@ -78,11 +92,12 @@ class Settings extends Model
     public function rules()
     {
         return [
-            ['netlifyDeployPreviewTriggerUrl', 'default', 'value' => ''],
-            ['netlifyDeployLiveTriggerUrl', 'string'],
             ['netlifyDeployLiveTriggerUrl', 'default', 'value' => ''],
+            ['netlifyDeployPreviewTriggerUrl', 'default', 'value' => ''],
             ['netlifyLiveUrl', 'default', 'value' => ''],
             ['netlifyPreviewUrl', 'default', 'value' => ''],
+            ['netlifyDeployLiveBranch', 'default', 'value' => ''],
+            ['netlifyDeployPreviewBranch', 'default', 'value' => ''],
         ];
     }
 }

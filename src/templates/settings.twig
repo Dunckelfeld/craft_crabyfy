@@ -41,6 +41,14 @@
     value: settings['netlifyDeployPreviewTriggerUrl']})
 }}
 
+{{ forms.textField({
+    label: 'Netlify Deploy Preview Branch',
+    instructions: '(staging / master / dev)',
+    id: 'netlifyDeployPreviewBranch',
+    name: 'netlifyDeployPreviewBranch',
+    value: settings['netlifyDeployPreviewBranch']})
+}}
+
 {# {% set env = getenv('ENVIRONMENT') %} #}
 {# {%if env == 'production'%} #}
     {{ forms.textField({
@@ -51,6 +59,14 @@
         value: settings['netlifyDeployLiveTriggerUrl']})
     }}
 {# {% endif %} #}
+
+{{ forms.textField({
+    label: 'Netlify Deploy Live Branch',
+    instructions: '(staging / master / dev)',
+    id: 'netlifyDeployLiveBranch',
+    name: 'netlifyDeployLiveBranch',
+    value: settings['netlifyDeployLiveBranch']})
+}}
 
 <h2>Incoming Webhooks</h2>
 <p>These urls should be added to netlify /settings/deploys "Deploy notifications" section as Outgoing Webhooks</p>
