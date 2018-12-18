@@ -124,7 +124,7 @@ class CraByFy extends Plugin
                 $event->rules['cpActionTrigger2'] = 'cra-by-fy/deploy/deploy-status-failed';
                 $event->rules['cpActionTrigger3'] = 'cra-by-fy/deploy/deploy-status-succeeded';
                 $event->rules['cpActionTrigger4'] = 'cra-by-fy/deploy/deploy-status-started';
-                $event->rules['cpActionTrigger8'] = 'cra-by-fy/deploy/live-deploy-status';
+                $event->rules['cpActionTrigger8'] = 'cra-by-fy/deploy/deploy-status';
             }
         );
 

@@ -72,37 +72,31 @@
 
   // interval that checks statusses
   function getStatus() {
-    getLiveDeployStatus();
-    getPreviewDeployStatus();
+    getDeployStatus();
   }
 
   getStatus(); // trigger directly
   setInterval(function() {
     getStatus();
-  }, 3000); // trigger every 3 seconds
+  }, 10000); // trigger every 3 seconds
 
   // functions that retrieve the status
-  function getLiveDeployStatus() {
+  function getDeployStatus() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        liveStatus = xmlHttp.responseText;
-        setStatusClasses();
+        // console.log(xmlHttp.responseText);
+        try {
+           statuses = JSON.parse(xmlHttp.responseText);
+           // console.log(statuses);
+           liveStatus = statuses.live;
+           previewStatus = statuses.preview;
+           setStatusClasses();
+        } catch(e) {
+        }
       }
     }
-    xmlHttp.open("GET", '/actions/cra-by-fy/deploy/live-deploy-status', true); // true for asynchronous
-    xmlHttp.send(null);
-  }
-
-  function getPreviewDeployStatus() {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        previewStatus = xmlHttp.responseText;
-        setStatusClasses();
-      }
-    }
-    xmlHttp.open("GET", '/actions/cra-by-fy/deploy/preview-deploy-status', true); // true for asynchronous
+    xmlHttp.open("GET", '/actions/cra-by-fy/deploy/deploy-status', true); // true for asynchronous
     xmlHttp.send(null);
   }
 

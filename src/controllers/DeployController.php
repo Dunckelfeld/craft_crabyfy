@@ -176,22 +176,18 @@ class DeployController extends Controller
      *
      * @return mixed
      */
-    public function actionLiveDeployStatus()
+    public function actionDeployStatus()
     {
       $settings = CraByFy::$plugin->getSettings();
-      return $this->getStatus($settings['netlifyDeployLiveBranch']);
-    }
 
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/cra-by-fy/deploy/do-something
-     *
-     * @return mixed
-     */
-    public function actionPreviewDeployStatus()
-    {
-      $settings = CraByFy::$plugin->getSettings();
-      return $this->getStatus($settings['netlifyDeployPreviewBranch']);
+      // return print_r($settings);
+
+      $statuses = array(
+        'live' => $this->getStatus($settings['netlifyDeployLiveBranch']),
+        'preview' => $this->getStatus($settings['netlifyDeployPreviewBranch'])
+      );
+      $json = json_encode($statuses);
+      return $json;
     }
 
     private function getStatus($deployType) {
