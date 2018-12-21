@@ -133,7 +133,10 @@ class CraByFy extends Plugin
             Elements::EVENT_AFTER_SAVE_ELEMENT,
             function (ElementEvent $event) {
                 Craft::debug('saving an Entry', 'cra-by-fy');
-                $this->deploy->deployPreview($event);
+                $settings = CraByFy::$plugin->getSettings();
+                if($settings['deployPreviewOnSave'] == "yes") {
+                  $this->deploy->deployPreview($event);
+                }
             }
         );
 
