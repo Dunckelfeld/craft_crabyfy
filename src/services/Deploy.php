@@ -53,41 +53,60 @@ class Deploy extends Component
         return $result;
     }
 
-    public function deployPreview() {
-      // Sets our destination URL
-      $settings = CraByFy::$plugin->getSettings();
-      $endpoint_url = $settings['netlifyDeployPreviewTriggerUrl'];
-      Craft::debug('deploying preview:', 'cra-by-fy');
-      if(!empty($endpoint_url)) {
-        $response = $this->curl($endpoint_url);
-      } else {
-        $response = 'No live deployment url set. Go to <a href="/admin/settings/plugins/cra-by-fy">Settings</a>';
-      }
+    /**
+     * Deploy preview.
+     *
+     * @return int|string
+     */
+    public function deployPreview()
+    {
+        // Sets our destination URL
+        $settings     = CraByFy::$plugin->getSettings();
+        $endpoint_url = $settings['netlifyDeployPreviewTriggerUrl'];
+        Craft::debug('deploying preview:', 'cra-by-fy');
+        if ( ! empty($endpoint_url)) {
+            $response = $this->curl($endpoint_url);
+        } else {
+            $response = 'No preview deployment url set. Go to <a href="/admin/settings/plugins/cra-by-fy">Settings</a>';
+        }
 
-      return $response;
+        return $response;
     }
 
-    public function deployLive() {
-      // Sets our destination URL
-      $settings = CraByFy::$plugin->getSettings();
-      $endpoint_url = $settings['netlifyDeployLiveTriggerUrl'];
-      Craft::debug('deploying live:', 'cra-by-fy');
-      // return false;
-      if(!empty($endpoint_url)) {
-        $response = $this->curl($endpoint_url);
-      } else {
-        $response = 'No live deployment url set. Go to <a href="/admin/settings/plugins/cra-by-fy">Settings</a>';
-      }
+    /**
+     * Deploy live.
+     *
+     * @return int|string
+     */
+    public function deployLive()
+    {
+        // Sets our destination URL
+        $settings     = CraByFy::$plugin->getSettings();
+        $endpoint_url = $settings['netlifyDeployLiveTriggerUrl'];
+        Craft::debug('deploying live:', 'cra-by-fy');
+        if ( ! empty($endpoint_url)) {
+            $response = $this->curl($endpoint_url);
+        } else {
+            $response = 'No live deployment url set. Go to <a href="/admin/settings/plugins/cra-by-fy">Settings</a>';
+        }
 
-      return $response;
+        return $response;
     }
 
-    private function curl($url) {
+    /**
+     * Request the deployment.
+     *
+     * @param $url
+     *
+     * @return int|string
+     */
+    private function curl($url)
+    {
         // Sets our options array so we can assign them all at once
         $options = [
-          CURLOPT_URL        => $url,
-          CURLOPT_POSTFIELDS => '',
-        	CURLOPT_POST       => true
+            CURLOPT_URL        => $url,
+            CURLOPT_POSTFIELDS => '',
+            CURLOPT_POST       => true
         ];
 
         Craft::debug($url, 'cra-by-fy');
@@ -104,8 +123,8 @@ class Deploy extends Component
         // Executes the cURL POST
         $results = curl_exec($curl);
 
-        if ($results === FALSE) {
-           return printf("cUrl error (#%d): %s<br>\n", curl_errno($curl), htmlspecialchars(curl_error($curl)));
+        if ($results === false) {
+            return printf("cUrl error (#%d): %s<br>\n", curl_errno($curl), htmlspecialchars(curl_error($curl)));
         }
 
         rewind($verbose);

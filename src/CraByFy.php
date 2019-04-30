@@ -90,9 +90,9 @@ class CraByFy extends Plugin
         parent::init();
         self::$plugin = $this;
 
-       $this->setComponents([
-           'deploy' => \dunckelfeld\crabyfy\services\Deploy::class,
-       ]);
+        $this->setComponents([
+            'deploy' => \dunckelfeld\crabyfy\services\Deploy::class,
+        ]);
 
         // // Register our site routes
         // Event::on(
@@ -128,76 +128,80 @@ class CraByFy extends Plugin
             }
         );
 
-        Event::on(
-            Elements::class,
-            Elements::EVENT_AFTER_SAVE_ELEMENT,
-            function (ElementEvent $event) {
-                Craft::debug('saving an Entry', 'cra-by-fy');
-                $settings = CraByFy::$plugin->getSettings();
-                if($settings['deployPreviewOnSave'] == "yes") {
-                  $this->deploy->deployPreview($event);
-                }
-            }
-        );
+
+        // Temporarily disabling triggering the automatic preview deploy,
+        // since it's causing performance issues. ~seamofreality
+
+        // Event::on(
+        //     Elements::class,
+        //     Elements::EVENT_AFTER_SAVE_ELEMENT,
+        //     function (ElementEvent $event) {
+        //         Craft::debug('saving an Entry', 'cra-by-fy');
+        //         $settings = CraByFy::$plugin->getSettings();
+        //         if($settings['deployPreviewOnSave'] == "yes") {
+        //           $this->deploy->deployPreview($event);
+        //        }
+        //     }
+        // );
 
         Event::on(
             Cp::class,
             Cp::EVENT_REGISTER_CP_NAV_ITEMS,
-            function(RegisterCpNavItemsEvent $event) {
+            function (RegisterCpNavItemsEvent $event) {
                 Craft::debug('creating nav items', 'cra-by-fy');
                 Craft::debug($event, 'cra-by-fy');
                 Craft::debug($event->navItems, 'cra-by-fy');
 
-                $settings = CraByFy::$plugin->getSettings();
-                $previewUrl = $settings['netlifyPreviewUrl'];
+                $settings          = CraByFy::$plugin->getSettings();
+                $previewUrl        = $settings['netlifyPreviewUrl'];
                 $event->navItems[] = [
-                    'url' => '/admin/actions/cra-by-fy/deploy',
-                    'id' => 'nav-crabify',
-                    'label' => 'CraByFy',
-                    'icon' => '@dunckelfeld/crabyfy/icon.svg',
+                    'url'    => '/admin/actions/cra-by-fy/deploy',
+                    'id'     => 'nav-crabify',
+                    'label'  => 'CraByFy',
+                    'icon'   => '@dunckelfeld/crabyfy/icon.svg',
                     'subnav' => [
-                      'deploy-live' => [
-                          'url' => '/admin/actions/cra-by-fy/deploy/deploy-live',
-                          'id' => 'nav-live-deploy',
-                          'label' => 'Deploy Live',
-                      ],
-                      'preview-url' => [
-                        'url' => $previewUrl,
-                        'id' => 'nav-preview-url',
-                        'target' => '_blank',
-                        'label' => 'Preview',
-                      ]
+                        'deploy-live' => [
+                            'url'   => '/admin/actions/cra-by-fy/deploy/deploy-live',
+                            'id'    => 'nav-live-deploy',
+                            'label' => 'Deploy Live',
+                        ],
+                        'preview-url' => [
+                            'url'    => $previewUrl,
+                            'id'     => 'nav-preview-url',
+                            'target' => '_blank',
+                            'label'  => 'Preview',
+                        ]
                     ]
                 ];
             }
         );
 
-        Craft::$app->getView()->hook('cp.layouts.base', function(array &$context) {
+        Craft::$app->getView()->hook('cp.layouts.base', function (array &$context) {
             return $this->deployButtonAssets();
         });
 
-        Craft::$app->getView()->hook('cp.entries.edit.details', function(array &$context) {
+        Craft::$app->getView()->hook('cp.entries.edit.details', function (array &$context) {
             return $this->previewButton($context['entry']['uri']);
         });
 
-/**
- * Logging in Craft involves using one of the following methods:
- *
- * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
- * Craft::info(): record a message that conveys some useful information.
- * Craft::warning(): record a warning message that indicates something unexpected has happened.
- * Craft::error(): record a fatal error that should be investigated as soon as possible.
- *
- * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
- *
- * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
- * the category to the method (prefixed with the fully qualified class name) where the constant appears.
- *
- * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
- * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
- *
- * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
- */
+        /**
+         * Logging in Craft involves using one of the following methods:
+         *
+         * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
+         * Craft::info(): record a message that conveys some useful information.
+         * Craft::warning(): record a warning message that indicates something unexpected has happened.
+         * Craft::error(): record a fatal error that should be investigated as soon as possible.
+         *
+         * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
+         *
+         * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
+         * the category to the method (prefixed with the fully qualified class name) where the constant appears.
+         *
+         * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
+         * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
+         *
+         * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
+         */
         Craft::info(
             Craft::t(
                 'cra-by-fy',
@@ -243,10 +247,11 @@ class CraByFy extends Plugin
     protected function previewButton($uri): string
     {
 
-        $settings = CraByFy::$plugin->getSettings();
+        $settings  = CraByFy::$plugin->getSettings();
         $variables = [
-          'previewLink' => $settings['netlifyPreviewUrl'].$uri,
+            'previewLink' => $settings['netlifyPreviewUrl'] . $uri,
         ];
+
         return Craft::$app->view->renderTemplate(
             'cra-by-fy/previewButton', $variables
         );
