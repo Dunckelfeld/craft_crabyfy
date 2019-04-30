@@ -58,7 +58,7 @@ class DeployController extends Controller
         'preview-deploy-status-failed',
         'preview-deploy-status-succeeded',
         'preview-deploy-status-started'
-      ];
+    ];
 
     // Public Methods
     // =========================================================================
@@ -75,13 +75,14 @@ class DeployController extends Controller
         $settings = CraByFy::$plugin->getSettings();
 
         $variables = [
-          'deployLiveTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-live',
-          'deployPreviewTriggerUrl' => '/actions/cra-by-fy/deploy/deploy-preview',
-          'netlifyDeployPreviewTriggerUrl' => $settings['netlifyDeployPreviewTriggerUrl'],
-          'netlifyDeployLiveTriggerUrl' => $settings['netlifyDeployLiveTriggerUrl'],
-          'previewUrl' => $settings['netlifyPreviewUrl'],
-          'liveUrl' => $settings['netlifyLiveUrl'],
+            'deployLiveTriggerUrl'           => '/actions/cra-by-fy/deploy/deploy-live',
+            'deployPreviewTriggerUrl'        => '/actions/cra-by-fy/deploy/deploy-preview',
+            'netlifyDeployPreviewTriggerUrl' => $settings['netlifyDeployPreviewTriggerUrl'],
+            'netlifyDeployLiveTriggerUrl'    => $settings['netlifyDeployLiveTriggerUrl'],
+            'previewUrl'                     => $settings['netlifyPreviewUrl'],
+            'liveUrl'                        => $settings['netlifyLiveUrl'],
         ];
+
         return $this->renderTemplate('cra-by-fy', $variables);
     }
 
@@ -95,6 +96,7 @@ class DeployController extends Controller
     {
         // $result = 'actionDeployLive';
         $result = CraByFy::getInstance()->deploy->deployLive();
+
         return $result;
     }
 
@@ -108,6 +110,7 @@ class DeployController extends Controller
     {
         // $result = 'actionDeployLive';
         $result = CraByFy::getInstance()->deploy->deployPreview();
+
         return $result;
     }
 
@@ -121,6 +124,7 @@ class DeployController extends Controller
     {
         $result = 'actionDeployStatusFailed';
         $this->setStatus('failed', $this->getType());
+
         return $result;
     }
 
@@ -134,6 +138,7 @@ class DeployController extends Controller
     {
         $result = 'actionDeployStatusSucceeded';
         $this->setStatus('succeeded', $this->getType());
+
         return $result;
     }
 
@@ -146,28 +151,28 @@ class DeployController extends Controller
     public function actionDeployStatusStarted()
     {
         $result = 'actionDeployStatusStarted';
-        $this->setStatus('started',$this->getType());
+        $this->setStatus('started', $this->getType());
+
         return $result;
     }
 
-    private function getType() {
-        $result = '';
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    private function getType()
+    {
+        $result      = '';
         $postContent = file_get_contents('php://input');
-        if($postContent) {
-          $content = json_decode($postContent);
-          Craft::debug('netlify post content', 'cra-by-fy');
-          Craft::debug($postContent, 'cra-by-fy');
-          $result = $content->branch;
+        if ($postContent) {
+            $content = json_decode($postContent);
+            Craft::debug('netlify post content', 'cra-by-fy');
+            Craft::debug($postContent, 'cra-by-fy');
+            $result = $content->branch;
         }
-        return $result;
-    }
 
-    private function setStatus($status, $deployType) {
-      $deployStatus = new DeployStatus();
-      $deployStatus->status = $status;
-      $deployStatus->deployType = $deployType;
-      $deployStatus->siteId = Craft::$app->getSites()->currentSite->id;
-      $deployStatus->save();
+        return $result;
     }
 
     /**
@@ -178,38 +183,62 @@ class DeployController extends Controller
      */
     public function actionDeployStatus()
     {
-      $settings = CraByFy::$plugin->getSettings();
+        $settings = CraByFy::$plugin->getSettings();
 
-      // return print_r($settings);
+        // return print_r($settings);
 
-      $statuses = array(
-        'live' => $this->getStatus($settings['netlifyDeployLiveBranch']),
-        'preview' => $this->getStatus($settings['netlifyDeployPreviewBranch'])
-      );
-      $json = json_encode($statuses);
-      return $json;
+        $statuses = array(
+            'live'    => $this->getStatus($settings['netlifyDeployLiveBranch']),
+            'preview' => $this->getStatus($settings['netlifyDeployPreviewBranch'])
+        );
+        $json     = json_encode($statuses);
+
+        return $json;
     }
 
-    private function getStatus($deployType) {
+    /**
+     * Get status.
+     *
+     * @param $deployType
+     *
+     * @return string
+     */
+    private function getStatus($deployType)
+    {
 
-      try {
-        $deployStatus = new DeployStatus();
-        $deployStatus = DeployStatus::find()
-          ->where(['deployType' => $deployType])
-          ->orderBy('dateCreated DESC')
-          ->limit(1)
-          ->all();
+        try {
+            $deployStatus = new DeployStatus();
+            $deployStatus = DeployStatus::find()
+                                        ->where(['deployType' => $deployType])
+                                        ->orderBy('dateCreated DESC')
+                                        ->limit(1)
+                                        ->all();
 
-        if(is_array($deployStatus) && isset($deployStatus[0])) {
-          $status = $deployStatus[0]->status;
-        } else {
-          $status = '-';
+            if (is_array($deployStatus) && isset($deployStatus[0])) {
+                $status = $deployStatus[0]->status;
+            } else {
+                $status = '-';
+            }
+        } catch (Exception $e) {
+            $status = '-';
         }
-      } catch (Exception $e){
-        $status = '-';
-      }
 
-      return $status;
+        return $status;
+    }
+
+    /**
+     * Set status.
+     *
+     * @param $status
+     * @param $deployType
+     */
+    private function setStatus($status, $deployType)
+    {
+        $deployStatus             = new DeployStatus();
+        $deployStatus->status     = $status;
+        $deployStatus->deployType = $deployType;
+        $deployStatus->siteId     = Craft::$app->getSites()->currentSite->id;
+        $deployStatus->save();
     }
 
 }

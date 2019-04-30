@@ -97,21 +97,21 @@ class Install extends Migration
     {
         $tablesCreated = false;
 
-    // crabyfy_deploystatus table
+        // crabyfy_deploystatus table
         $tableSchema = Craft::$app->db->schema->getTableSchema('{{%crabyfy_deploystatus}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
                 '{{%crabyfy_deploystatus}}',
                 [
-                    'id' => $this->primaryKey(),
+                    'id'          => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
-                    'uid' => $this->uid(),
-                // Custom columns in the table
-                    'siteId' => $this->integer()->notNull(),
-                    'status' => $this->string(255)->notNull()->defaultValue(''),
-                    'deployType' => $this->string(255)->notNull()->defaultValue(''),
+                    'uid'         => $this->uid(),
+                    // Custom columns in the table
+                    'siteId'      => $this->integer()->notNull(),
+                    'status'      => $this->string(255)->notNull()->defaultValue(''),
+                    'deployType'  => $this->string(255)->notNull()->defaultValue(''),
                 ]
             );
         }
@@ -126,7 +126,7 @@ class Install extends Migration
      */
     protected function createIndexes()
     {
-    // crabyfy_deploystatus table
+        // crabyfy_deploystatus table
         // $this->createIndex(
         //     $this->db->getIndexName(
         //         '{{%crabyfy_deploystatus}}',
@@ -153,7 +153,7 @@ class Install extends Migration
      */
     protected function addForeignKeys()
     {
-    // crabyfy_deploystatus table
+        // crabyfy_deploystatus table
         $this->addForeignKey(
             $this->db->getForeignKeyName('{{%crabyfy_deploystatus}}', 'siteId'),
             '{{%crabyfy_deploystatus}}',
@@ -181,7 +181,7 @@ class Install extends Migration
      */
     protected function removeTables()
     {
-    // crabyfy_deploystatus table
+        // crabyfy_deploystatus table
         $this->dropTableIfExists('{{%crabyfy_deploystatus}}');
     }
 }

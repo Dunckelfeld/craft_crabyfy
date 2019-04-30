@@ -10,28 +10,28 @@
  * @since     1.0.0
  */
 
- .livepreviewbtn {
-   display: none; /* With gatsby deploy we currently have no live preview */
- }
+.livepreviewbtn {
+    display: none; /* With gatsby deploy we currently have no live preview */
+}
 
- .btn.btnpreviewdeploy,
- .btn.btnlivedeploy {
+.btn.btnpreviewdeploy,
+.btn.btnlivedeploy {
     padding-right: 30px;
     position: relative;
-  }
+}
 
-  #nav-crabify {
+#nav-crabify {
     position: relative;
-  }
+}
 
-  #nav-crabify .label {
-      padding-right: 58px;
-  }
+#nav-crabify .label {
+    padding-right: 58px;
+}
 
-  #nav-crabify:after,
-  #nav-crabify:before,
- .btn.btnpreviewdeploy:before,
- .btn.btnlivedeploy:before {
+#nav-crabify:after,
+#nav-crabify:before,
+.btn.btnpreviewdeploy:before,
+.btn.btnlivedeploy:before {
     width: 10px;
     height: 10px;
     position: absolute;
@@ -44,43 +44,43 @@
     border: 1px solid;
     border-color: #b3b3b3;
     border-radius: 50%;
- }
+}
 
- #nav-crabify:before,
- #nav-crabify:after {
-   border-color: #2d2d2d;
-   background: #808080;
- }
+#nav-crabify:before,
+#nav-crabify:after {
+    border-color: #2d2d2d;
+    background: #808080;
+}
 
- #nav-crabify:after {
-   right: 24px;
- }
+#nav-crabify:after {
+    right: 24px;
+}
 
-  #nav-crabify.preview-status-succeeded:before,
-  #nav-crabify.live-status-succeeded:after,
- .btn.preview-status-succeeded:before,
- .btn.live-status-succeeded:before {
-   background: green;
- }
+#nav-crabify.preview-status-succeeded:before,
+#nav-crabify.live-status-succeeded:after,
+.btn.preview-status-succeeded:before,
+.btn.live-status-succeeded:before {
+    background: green;
+}
 
- #nav-crabify.preview-status-error:before,
- #nav-crabify.live-status-error:after,
- #nav-crabify.preview-status-failed:before,
- #nav-crabify.live-status-failed:after,
- .btn.preview-status-error:before,
- .btn.live-status-error:before,
- .btn.preview-status-failed:before,
- .btn.live-status-failed:before {
-   background: red;
- }
+#nav-crabify.preview-status-error:before,
+#nav-crabify.live-status-error:after,
+#nav-crabify.preview-status-failed:before,
+#nav-crabify.live-status-failed:after,
+.btn.preview-status-error:before,
+.btn.live-status-error:before,
+.btn.preview-status-failed:before,
+.btn.live-status-failed:before {
+    background: red;
+}
 
- #nav-crabify.preview-status-started:before,
- #nav-crabify.live-status-started:after,
- .btn.preview-status-started:before,
- .btn.live-status-started:before {
-   background: orange;
- }
+#nav-crabify.preview-status-started:before,
+#nav-crabify.live-status-started:after,
+.btn.preview-status-started:before,
+.btn.live-status-started:before {
+    background: orange;
+}
 
- #details #crabify-entry-preview {
-   margin: 24px;
- }
+#details #crabify-entry-preview {
+    margin: 24px;
+}
