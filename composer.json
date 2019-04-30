@@ -2,7 +2,7 @@
     "name": "dunckelfeld/cra-by-fy",
     "description": "Deploys craft fed gatsby frontend to netlify",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",
