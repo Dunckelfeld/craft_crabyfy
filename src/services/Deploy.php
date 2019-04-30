@@ -84,7 +84,6 @@ class Deploy extends Component
         $settings     = CraByFy::$plugin->getSettings();
         $endpoint_url = $settings['netlifyDeployLiveTriggerUrl'];
         Craft::debug('deploying live:', 'cra-by-fy');
-        // return false;
         if ( ! empty($endpoint_url)) {
             $response = $this->curl($endpoint_url);
         } else {
