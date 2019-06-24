@@ -249,7 +249,7 @@ class CraByFy extends Plugin
 
         $settings  = CraByFy::$plugin->getSettings();
         $variables = [
-            'previewLink' => $settings['netlifyPreviewUrl'] . $uri,
+            'previewLink' => $settings['netlifyPreviewUrl'] . $uri . '?preview=1',
         ];
 
         return Craft::$app->view->renderTemplate(
