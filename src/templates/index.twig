@@ -30,7 +30,7 @@
       {% if netlifyDeployLiveTriggerUrl|length %}
         <h2>Deploy</h2>
         <p>Wenn auf der Preview Seite alles passt, können die Änderungen hier live geschaltet werden</p>
-        <p><a href="{{deployLiveTriggerUrl}}" data-trigger-url="{{netlifyDeployLiveTriggerUrl}}" target="_blank" class="btn btnlivedeploy" id="crabify-deploy-live">Deploy Live</a></p>
+        <p><a href="{{netlifyDeployLiveTriggerUrl}}" target="_blank" class="btn btnlivedeploy" id="crabify-deploy-live">Deploy Live</a></p>
       {% endif %}
       {% if liveUrl|length %}
         <a href="{{liveUrl}}" target="_blank" >Zur Live Seite</a>
@@ -63,7 +63,7 @@
       {% if netlifyDeployPreviewTriggerUrl|length %}
         <h2>Deploy</h2>
         <p>Beim Speichern wird die Preview Seite automatisch aufgebaut. Hier kann der Aufbau manuell angestoßen werden</p>
-        <p><a href="{{deployPreviewTriggerUrl}}"  data-trigger-url="{{netlifyDeployPreviewTriggerUrl}}" target="_blank" class="btn btnpreviewdeploy" id="crabify-deploy-preview">Deploy Preview</a></p>
+        <p><a href="{{netlifyDeployPreviewTriggerUrl}}" target="_blank" class="btn btnpreviewdeploy" id="crabify-deploy-preview">Deploy Preview</a></p>
       {% endif %}
       {% if previewUrl|length %}
         <a href="{{previewUrl}}" target="_blank" >Zur Preview Seite</a>

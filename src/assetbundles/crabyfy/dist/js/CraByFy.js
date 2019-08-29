@@ -24,22 +24,31 @@
   for(var i = 0; i<ajaxButtons.length; i++) {
     ajaxButtons[i].onclick = function(e) {
       // e.preventDefault();
-      confirm("Soll das deployment auf netlify getriggert werden? (" + e.target.getAttribute('data-trigger-url')+")");
-      callAjaxUrl(e.target.href, ajaxButtons[i]);
-      return false;
+      if(confirm("Soll das deployment auf netlify getriggert werden? (" + e.target.href +")")) {
+        e.preventDefault();
+        callAjaxUrl(e.target.href);
+        console.log('deploy triggered');
+      } else {
+        console.log('aborted');
+        return false;
+      }
     };
   }
 
   // function that makes ajax calls to netlify deploy triggers
-  function callAjaxUrl(url, button) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        // console.log('ajax Call succeeded');
-      }
-    }
-    xmlHttp.open("GET", url, true); // true for asynchronous
-    xmlHttp.send(null);
+  function callAjaxUrl(url) {
+    fetch(url, {
+      method: 'post',
+    }).then(() => console.log('yay')).catch(error => console.log('error is', error));
+
+    // var xmlHttp = new XMLHttpRequest();
+    // xmlHttp.onreadystatechange = function() {
+    //   if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    //     // console.log('ajax Call succeeded');
+    //   }
+    // }
+    // xmlHttp.open("GET", url, true); // true for asynchronous
+    // xmlHttp.send(null);
   }
 
 

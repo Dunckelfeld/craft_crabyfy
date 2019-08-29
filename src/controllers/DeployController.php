@@ -75,8 +75,6 @@ class DeployController extends Controller
         $settings = CraByFy::$plugin->getSettings();
 
         $variables = [
-            'deployLiveTriggerUrl'           => '/actions/cra-by-fy/deploy/deploy-live',
-            'deployPreviewTriggerUrl'        => '/actions/cra-by-fy/deploy/deploy-preview',
             'netlifyDeployPreviewTriggerUrl' => $settings['netlifyDeployPreviewTriggerUrl'],
             'netlifyDeployLiveTriggerUrl'    => $settings['netlifyDeployLiveTriggerUrl'],
             'previewUrl'                     => $settings['netlifyPreviewUrl'],
@@ -84,34 +82,6 @@ class DeployController extends Controller
         ];
 
         return $this->renderTemplate('cra-by-fy', $variables);
-    }
-
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/cra-by-fy/deploy/do-something
-     *
-     * @return mixed
-     */
-    public function actionDeployLive()
-    {
-        // $result = 'actionDeployLive';
-        $result = CraByFy::getInstance()->deploy->deployLive();
-
-        return $result;
-    }
-
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/cra-by-fy/deploy/do-something
-     *
-     * @return mixed
-     */
-    public function actionDeployPreview()
-    {
-        // $result = 'actionDeployLive';
-        $result = CraByFy::getInstance()->deploy->deployPreview();
-
-        return $result;
     }
 
     /**
