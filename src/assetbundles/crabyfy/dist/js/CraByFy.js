@@ -26,7 +26,9 @@
       // e.preventDefault();
       if(confirm("Soll das deployment auf netlify getriggert werden? (" + e.target.href +")")) {
         e.preventDefault();
-        callAjaxUrl(e.target.href);
+        e.target.href.split('|').forEach(function(url) {
+          callAjaxUrl(url);
+        });
         console.log('deploy triggered');
       } else {
         console.log('aborted');
