@@ -40,9 +40,15 @@
 
   // function that makes ajax calls to netlify deploy triggers
   function callAjaxUrl(url) {
-    fetch(url, {
-      method: 'post',
-    }).then(() => console.log('yay')).catch(error => console.log('error is', error));
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+      }).then(() => console.log('yay')).catch(error => console.log('error is', error));
+      const json = await response.json();
+      console.log('Success:', JSON.stringify(json));
+    } catch (error) {
+      console.error('Error:', error);
+    }
 
     // var xmlHttp = new XMLHttpRequest();
     // xmlHttp.onreadystatechange = function() {
