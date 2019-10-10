@@ -24,9 +24,10 @@
   for(var i = 0; i<ajaxButtons.length; i++) {
     ajaxButtons[i].onclick = function(e) {
       // e.preventDefault();
-      if(confirm("Soll das deployment auf netlify getriggert werden? (" + e.target.href +")")) {
+      var triggerUrls = decodeURIComponent(e.target.href);
+      if(confirm("Soll das deployment auf netlify getriggert werden? (" + triggerUrls +")")) {
         e.preventDefault();
-        e.target.href.split('|').forEach(function(url) {
+        triggerUrls.split('|').forEach(function(url) {
           callAjaxUrl(url);
         });
         console.log('deploy triggered');
