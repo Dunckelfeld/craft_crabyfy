@@ -39,13 +39,18 @@
   }
 
   // function that makes ajax calls to netlify deploy triggers
-  function callAjaxUrl(url) {
+  async function callAjaxUrl(url) {
     try {
       const response = await fetch(url, {
         method: 'POST',
-      }).then(() => console.log('yay')).catch(error => console.log('error is', error));
-      const json = await response.json();
-      console.log('Success:', JSON.stringify(json));
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': 0,
+        },
+        body: '{}',
+      })
+      const json = await response
+      console.log('Success:', json);
     } catch (error) {
       console.error('Error:', error);
     }
