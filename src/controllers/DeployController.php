@@ -57,7 +57,10 @@ class DeployController extends Controller
         'live-deploy-status-started',
         'preview-deploy-status-failed',
         'preview-deploy-status-succeeded',
-        'preview-deploy-status-started'
+        'preview-deploy-status-started',
+        'deploy-status-failed',
+        'deploy-status-succeeded',
+        'deploy-status-started'
     ];
 
     // Public Methods
